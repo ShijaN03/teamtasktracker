@@ -11,6 +11,7 @@ extension TasksView: UITableViewDataSource, UITableViewDelegate {
         }
         let task = tasks[indexPath.row]
         cell.configure(with: task)
+        
         return cell
     }
     

@@ -6,6 +6,7 @@ class TaskCell: UITableViewCell {
     
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
+    let takeButton = UIButton(type: .system)
     
     private var backgroundShapeLayer: CAShapeLayer?
     
@@ -20,7 +21,7 @@ class TaskCell: UITableViewCell {
         isUserInteractionEnabled = true
         title()
         description()
-        takeButton()
+        setUpTakeButton()
        
     }
     
@@ -77,16 +78,15 @@ class TaskCell: UITableViewCell {
         ])
     }
     
-    private func takeButton() {
-        let button = UIButton(type: .system)
+    private func setUpTakeButton() {
         
-        contentView.addSubview(button)
+        contentView.addSubview(takeButton)
         
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Взять", for: .normal)
+        takeButton.translatesAutoresizingMaskIntoConstraints = false
+        takeButton.setTitle("Взять", for: .normal)
         NSLayoutConstraint.activate([
-            button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40)
+            takeButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            takeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40)
         ])
         
         

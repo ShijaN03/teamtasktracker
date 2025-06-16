@@ -19,16 +19,16 @@ class TasksView: UIViewController, TasksViewProtocol {
     private let tableView = UITableView()
     
     var tasks: [Task] = [
-        Task(title: "Разработка интерфейса", description: "Создать макет экрана задач и реализовать UI в соответствии с дизайном."),
-            Task(title: "Интеграция API", description: "Подключить сервер и отобразить реальные данные в приложении."),
-            Task(title: "Написание тестов", description: "Добавить unit-тесты для бизнес-логики presenter."),
-            Task(title: "Обработка ошибок", description: "Реализовать отображение ошибок при проблемах с сетью."),
-            Task(title: "Добавление анимаций", description: "Улучшить пользовательский опыт с помощью плавных переходов."),
-            Task(title: "Рефакторинг кода", description: "Разделить модули по архитектуре и улучшить читаемость."),
-            Task(title: "Добавление новых экранов", description: "Реализовать экран профиля пользователя."),
-            Task(title: "Локализация", description: "Добавить поддержку русского и английского языков."),
-            Task(title: "Сохранение состояния", description: "Обеспечить сохранение данных между сессиями."),
-            Task(title: "Настройка CI/CD", description: "Автоматизировать сборку и проверку проекта.")
+        Task(title: "Разработка интерфейса", description: "Создать макет экрана задач и реализовать UI в соответствии с дизайном.", isStarted: false),
+            Task(title: "Интеграция API", description: "Подключить сервер и отобразить реальные данные в приложении.", isStarted: false),
+            Task(title: "Написание тестов", description: "Добавить unit-тесты для бизнес-логики presenter.", isStarted: false),
+            Task(title: "Обработка ошибок", description: "Реализовать отображение ошибок при проблемах с сетью.", isStarted: false),
+            Task(title: "Добавление анимаций", description: "Улучшить пользовательский опыт с помощью плавных переходов.", isStarted: false),
+            Task(title: "Рефакторинг кода", description: "Разделить модули по архитектуре и улучшить читаемость.", isStarted: false),
+            Task(title: "Добавление новых экранов", description: "Реализовать экран профиля пользователя.", isStarted: false),
+            Task(title: "Локализация", description: "Добавить поддержку русского и английского языков.", isStarted: false),
+            Task(title: "Сохранение состояния", description: "Обеспечить сохранение данных между сессиями.", isStarted: false),
+            Task(title: "Настройка CI/CD", description: "Автоматизировать сборку и проверку проекта.", isStarted: false)
     ]
     
     private func setUpSubviews() {

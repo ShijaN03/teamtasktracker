@@ -16,15 +16,22 @@ class TaskInfoView: UIViewController, TaskInfoViewProtocol {
         super.viewDidLoad()
         presenter.viewDidLoad()
         view.backgroundColor = .white
-        buildHeadView()
-        setUpTitleLabel()
-        setUpDescriptionLabel()
+        setUpSubviews()
         
     }
     
     func displayTask(title: String, description: String) {
         titleLabel.text = title
         descriptionLabel.text = description
+    }
+    
+    private func setUpSubviews() {
+        navigationItem.hidesBackButton = true
+        buildHeadView()
+        setUpBackButton()
+        setUpTitleLabel()
+        setUpDescriptionLabel()
+        
     }
     
     private func buildHeadView() {
@@ -56,6 +63,23 @@ class TaskInfoView: UIViewController, TaskInfoViewProtocol {
             titleLabel.centerXAnchor.constraint(equalTo: headView.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: headView.topAnchor, constant: 60)
         ])
+        
+    }
+    
+    private func setUpBackButton() {
+        let button = UIButton(type: .system)
+        
+        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+        
+        let barButtonItem = UIBarButtonItem(customView: button)
+        navigationItem.leftBarButtonItem = barButtonItem
+    }
+    
+    
+    @objc private func backButtonAction() {
+        navigationController?.popViewController(animated: true)
     }
     
     private func setUpTitleLabel() {
