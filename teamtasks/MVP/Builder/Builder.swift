@@ -52,6 +52,15 @@ class Builder: BuilderProtocol {
         return view
     }
     
+    static func buildTaskInfoView(task: Task) -> UIViewController {
+        
+        let view = TaskInfoView()
+        let presenter = TaskInfoPresenter(view: view, task: task)
+        view.presenter = presenter
+        
+        return view
+    }
+    
     static func buildTabBarController() -> UITabBarController {
         
         let view = TabBarControllerView()

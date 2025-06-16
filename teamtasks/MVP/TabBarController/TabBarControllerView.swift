@@ -45,7 +45,6 @@ class TabBarControllerView: UITabBarController, TabBarControllerViewProtocol {
             cornerRadius: 40)
         
         layer.path = bezierPath.cgPath
-        layer.fillColor = UIColor.systemGray5.cgColor
         
         tabBar.layer.insertSublayer(layer, at: 0)
         tabBar.itemPositioning = .centered
@@ -68,6 +67,8 @@ class TabBarControllerView: UITabBarController, TabBarControllerViewProtocol {
         vc.tabBarItem.title = title
         vc.tabBarItem.image = image
         
-        return vc
+        let navController = UINavigationController(rootViewController: vc)
+        
+        return navController
     }
 }

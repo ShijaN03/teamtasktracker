@@ -6,7 +6,6 @@ protocol TasksViewProtocol: AnyObject {
 
 class TasksView: UIViewController, TasksViewProtocol {
     
-    
     var presenter: TasksPresenterProtocol!
     
     override func viewDidLoad() {
@@ -16,23 +15,35 @@ class TasksView: UIViewController, TasksViewProtocol {
         setUpSubviews()
     }
     
+    let tableView = UITableView()
+    
     var tasks: [Task] = [
-        Task(title: "1", description: "21313"),
-        Task(title: "1", description: "21313"),
-        Task(title: "1", description: "21313")
+        Task(title: "Разработка интерфейса", description: "Создать макет экрана задач и реализовать UI в соответствии с дизайном."),
+            Task(title: "Интеграция API", description: "Подключить сервер и отобразить реальные данные в приложении."),
+            Task(title: "Написание тестов", description: "Добавить unit-тесты для бизнес-логики presenter."),
+            Task(title: "Обработка ошибок", description: "Реализовать отображение ошибок при проблемах с сетью."),
+            Task(title: "Добавление анимаций", description: "Улучшить пользовательский опыт с помощью плавных переходов."),
+            Task(title: "Рефакторинг кода", description: "Разделить модули по архитектуре и улучшить читаемость."),
+            Task(title: "Добавление новых экранов", description: "Реализовать экран профиля пользователя."),
+            Task(title: "Локализация", description: "Добавить поддержку русского и английского языков."),
+            Task(title: "Сохранение состояния", description: "Обеспечить сохранение данных между сессиями."),
+            Task(title: "Настройка CI/CD", description: "Автоматизировать сборку и проверку проекта.")
     ]
     
     private func setUpSubviews() {
-        tableView()
+        buildTableView()
     }
     
-    private func tableView() {
-        let tableView = UITableView()
-        
+    private func buildTableView() {
         
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
+        tableView.isUserInteractionEnabled = true
+        
+        tableView.register(TaskCell.self, forCellReuseIdentifier: TaskCell.identifier)
+        
+        tableView.separatorStyle = .none
         
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
