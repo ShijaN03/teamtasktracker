@@ -11,11 +11,12 @@ class TasksView: UIViewController, TasksViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .cyan
+        view.backgroundColor = .white
         setUpSubviews()
     }
     
-    let tableView = UITableView()
+    private let headView = UIView()
+    private let tableView = UITableView()
     
     var tasks: [Task] = [
         Task(title: "Разработка интерфейса", description: "Создать макет экрана задач и реализовать UI в соответствии с дизайном."),
@@ -31,7 +32,39 @@ class TasksView: UIViewController, TasksViewProtocol {
     ]
     
     private func setUpSubviews() {
+        buildHeadView()
         buildTableView()
+    }
+    
+    private func buildHeadView() {
+        
+        let titleLabel = UILabel()
+        
+        view.addSubview(headView)
+        
+        headView.backgroundColor = .black
+        
+        headView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            headView.topAnchor.constraint(equalTo: view.topAnchor),
+            headView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headView.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
+        headView.addSubview(titleLabel)
+        
+        titleLabel.text = "Tasks"
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            titleLabel.centerXAnchor.constraint(equalTo: headView.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: headView.topAnchor, constant: 60)
+        ])
     }
     
     private func buildTableView() {
@@ -48,7 +81,7 @@ class TasksView: UIViewController, TasksViewProtocol {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: headView.bottomAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -56,5 +89,6 @@ class TasksView: UIViewController, TasksViewProtocol {
         
         
     }
+    
     
 }

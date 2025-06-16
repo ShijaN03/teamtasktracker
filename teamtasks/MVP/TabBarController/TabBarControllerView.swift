@@ -17,6 +17,8 @@ class TabBarControllerView: UITabBarController, TabBarControllerViewProtocol {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setUpTabBarShape()
+        
+        
     }
     
     
@@ -53,6 +55,11 @@ class TabBarControllerView: UITabBarController, TabBarControllerViewProtocol {
         layer.fillColor = UIColor.tabBarBackgroundColor.cgColor
         tabBar.tintColor = .tabBarSelectedItemColor
         tabBar.unselectedItemTintColor = .tabBarItemColor
+        
+        tabBar.backgroundImage = UIImage()
+        tabBar.shadowImage = UIImage()
+        tabBar.isTranslucent = true
+        tabBar.backgroundColor = .clear
         
         
     }

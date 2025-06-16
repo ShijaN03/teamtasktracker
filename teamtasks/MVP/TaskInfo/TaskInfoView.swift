@@ -10,11 +10,13 @@ class TaskInfoView: UIViewController, TaskInfoViewProtocol {
     
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
+    private let headView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
         view.backgroundColor = .white
+        buildHeadView()
         setUpTitleLabel()
         setUpDescriptionLabel()
         
@@ -23,6 +25,37 @@ class TaskInfoView: UIViewController, TaskInfoViewProtocol {
     func displayTask(title: String, description: String) {
         titleLabel.text = title
         descriptionLabel.text = description
+    }
+    
+    private func buildHeadView() {
+        
+        let titleLabel = UILabel()
+        
+        view.addSubview(headView)
+        
+        headView.backgroundColor = .black
+        
+        headView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            headView.topAnchor.constraint(equalTo: view.topAnchor),
+            headView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            headView.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
+        headView.addSubview(titleLabel)
+        
+        titleLabel.text = "Tasks"
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            titleLabel.centerXAnchor.constraint(equalTo: headView.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: headView.topAnchor, constant: 60)
+        ])
     }
     
     private func setUpTitleLabel() {
