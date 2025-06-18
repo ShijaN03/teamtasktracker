@@ -1,16 +1,18 @@
 import UIKit
 
 protocol TaskInfoViewProtocol: AnyObject {
-    func displayTask(title: String, description: String)
+    func displayTask(title: String, description: String, isStarted: Bool)
 }
 
 class TaskInfoView: UIViewController, TaskInfoViewProtocol {
     
     var presenter: TaskInfoPresenterProtocol!
     
+    private var isStarted: Bool = false
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
     private let headView = UIView()
+    private let takeButton = UIButton(type: .system)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +22,11 @@ class TaskInfoView: UIViewController, TaskInfoViewProtocol {
         
     }
     
-    func displayTask(title: String, description: String) {
+    func displayTask(title: String, description: String, isStarted: Bool) {
         titleLabel.text = title
         descriptionLabel.text = description
+        self.isStarted = isStarted
+        updateTakeButton()
     }
     
     private func setUpSubviews() {
@@ -31,6 +35,7 @@ class TaskInfoView: UIViewController, TaskInfoViewProtocol {
         setUpBackButton()
         setUpTitleLabel()
         setUpDescriptionLabel()
+        setUpTakeButton()
         
     }
     
@@ -109,5 +114,47 @@ class TaskInfoView: UIViewController, TaskInfoViewProtocol {
             descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
             descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 300)
         ])
+    }
+    
+    private func setUpTakeButton() {
+        
+        takeButton.addTarget(self, action: #selector(takeButtonTapped), for: .touchUpInside)
+        
+        if isStarted {
+            takeButton.setTitle("Начато", for: .normal)
+            takeButton.backgroundColor = .green
+            takeButton.tintColor = .white
+        } else {
+            takeButton.setTitle("Взять", for: .normal)
+            takeButton.backgroundColor = .gray
+            takeButton.tintColor = .white
+        }
+        takeButton.layer.cornerRadius = 12
+        
+        view.addSubview(takeButton)
+        
+        takeButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            takeButton.widthAnchor.constraint(equalToConstant: 100),
+            takeButton.heightAnchor.constraint(equalToConstant: 40),
+            takeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            takeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200)
+        ])
+    }
+    
+    private func updateTakeButton() {
+        if isStarted {
+            takeButton.setTitle("Начато", for: .normal)
+            takeButton.backgroundColor = .green
+            takeButton.tintColor = .white
+        } else {
+            takeButton.setTitle("Взять", for: .normal)
+            takeButton.backgroundColor = .gray
+            takeButton.tintColor = .white
+        }
+    }
+    
+    @objc private func takeButtonTapped() {
+        presenter.takeButtonTapped()
     }
 }

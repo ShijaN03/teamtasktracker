@@ -1,6 +1,7 @@
 import UIKit
 
 extension TasksView: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tasks.count
     }
@@ -12,6 +13,10 @@ extension TasksView: UITableViewDataSource, UITableViewDelegate {
         let task = tasks[indexPath.row]
         cell.configure(with: task)
         
+        cell.onTakeTapped = { [weak self] in guard let self = self else { return }
+            self.tasks[indexPath.row].isStarted = true
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
         return cell
     }
     
@@ -24,4 +29,5 @@ extension TasksView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
 }

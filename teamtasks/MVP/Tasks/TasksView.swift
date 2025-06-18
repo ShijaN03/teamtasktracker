@@ -16,7 +16,7 @@ class TasksView: UIViewController, TasksViewProtocol {
     }
     
     private let headView = UIView()
-    private let tableView = UITableView()
+    let tableView = UITableView()
     
     var tasks: [Task] = [
         Task(title: "Разработка интерфейса", description: "Создать макет экрана задач и реализовать UI в соответствии с дизайном.", isStarted: false),

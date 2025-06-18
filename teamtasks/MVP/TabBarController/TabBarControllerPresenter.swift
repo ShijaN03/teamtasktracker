@@ -5,6 +5,7 @@ protocol TabBarControllerPresenterProtocol: AnyObject {
 class TabBarControllerPresenter: TabBarControllerPresenterProtocol {
     required init(view: (any TabBarControllerViewProtocol)?) {
         self.view = view
+        
     }
     
     weak var view: TabBarControllerViewProtocol?

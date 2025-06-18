@@ -7,12 +7,23 @@ class TaskCell: UITableViewCell {
     let titleLabel = UILabel()
     let descriptionLabel = UILabel()
     let takeButton = UIButton(type: .system)
+    var onTakeTapped: (() -> Void)?
     
     private var backgroundShapeLayer: CAShapeLayer?
     
     func configure(with info: Task) {
         titleLabel.text = info.title
         descriptionLabel.text = info.description
+        
+        if info.isStarted {
+            takeButton.setTitle("Начато", for: .normal)
+            takeButton.backgroundColor = .green
+            takeButton.tintColor = .white
+        } else {
+            takeButton.setTitle("Взять", for: .normal)
+            takeButton.backgroundColor = .gray
+            takeButton.tintColor = .white
+        }
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -80,15 +91,23 @@ class TaskCell: UITableViewCell {
     
     private func setUpTakeButton() {
         
+        takeButton.addTarget(self, action: #selector(takeButtonTapped), for: .touchUpInside)
+        
+        takeButton.layer.cornerRadius = 12
+        
         contentView.addSubview(takeButton)
         
         takeButton.translatesAutoresizingMaskIntoConstraints = false
-        takeButton.setTitle("Взять", for: .normal)
         NSLayoutConstraint.activate([
+            takeButton.widthAnchor.constraint(equalToConstant: 80),
+            takeButton.heightAnchor.constraint(equalToConstant: 30),
             takeButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            takeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40)
+            takeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
         ])
         
-        
+    }
+    
+    @objc private func takeButtonTapped() {
+        onTakeTapped?()
     }
 }
